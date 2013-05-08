@@ -61,5 +61,11 @@ describe 'Figurine::One' do
       car_form = CarForm.new(:engine => engine)
       expect(car_form.engine).to eql(:horsepower => 800, :torque => 700)
     end
+
+    it 'does not strip out id if non-nil' do
+      engine = Engine.new({ :horsepower => 800, :torque => 700, :cylinders => 16, :id => 1 })
+      car_form = CarForm.new(:engine => engine)
+      expect(car_form.engine).to eql(:horsepower => 800, :torque => 700, :id => 1)
+    end
   end
 end

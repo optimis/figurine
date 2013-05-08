@@ -16,6 +16,7 @@ module Figurine
         elsif val.respond_to?(:attributes)
           Hash[*val.attributes.select { |key, _| whitelist.include?(key) || whitelist.empty? }.flatten]
         end
+        val[:id] ? @attributes[model].merge!(:id => val[:id]) : @attributes_model
       end
     end
 

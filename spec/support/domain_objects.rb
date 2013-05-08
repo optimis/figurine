@@ -6,6 +6,10 @@ module Hashable
   def attributes
     @attrs
   end
+
+  def [](key)
+    @attrs[key]
+  end
 end
 
 class Trunk
