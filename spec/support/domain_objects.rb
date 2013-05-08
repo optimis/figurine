@@ -15,3 +15,11 @@ end
 class Engine
   include Hashable
 end
+
+class Tire
+  include Hashable
+end
+
+class Seat
+  include Hashable
+end

@@ -1,6 +1,7 @@
 module Figurine
   class Form
     extend One
+    extend Many
 
     def initialize(attributes= {})
       @attributes = {} 
