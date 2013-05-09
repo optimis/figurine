@@ -9,10 +9,13 @@ module Figurine
       end
 
       define_method "#{model}=" do |values|
-        return if values.nil?
-        whitelist = self.class.instance_variable_get("@whitelist")[model]
-        @attributes[model] = values.compact.map do |val|
-          DynamicSubclasser.create(Collaborator, model.to_s.classify).new(val, whitelist)
+        @attributes[model] = if values.nil?
+           []
+        else
+          whitelist = self.class.instance_variable_get("@whitelist")[model]
+          values.compact.map do |val|
+            DynamicSubclasser.create(Collaborator, model.to_s.classify).new(val, whitelist)
+          end
         end
       end
     end

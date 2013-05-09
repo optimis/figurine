@@ -20,7 +20,7 @@ describe 'Figurine::Many' do
 
     it 'ignores nil values' do
       car_form = CarForm.new(:tires => nil)
-      expect(car_form.tires).to be_nil
+      expect(car_form.tires).to be_empty
     end
 
     it 'ignores nil values within the array' do
