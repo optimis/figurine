@@ -11,7 +11,7 @@ module Figurine
         end
 
         def self.model_name
-          ActiveModel::Name.new(self, nil, name)
+          ActiveModel::Name.new(self, nil, @name)
         end
       end
       klass.const_set("#{name}_#{collaborator.hash}", collaborator)
