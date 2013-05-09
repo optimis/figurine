@@ -1,5 +1,5 @@
 module Figurine
-  class Attributes < ActiveSupport::BasicObject
+  class Collaborator < ActiveSupport::BasicObject
     extend ActiveModel::Naming
     include ActiveModel::Conversion
 

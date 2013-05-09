@@ -12,7 +12,7 @@ module Figurine
         return if values.nil?
         whitelist = self.class.instance_variable_get("@whitelist")[model]
         @attributes[model] = values.compact.map do |val|
-          DynamicSubclasser.create(Attributes, model.to_s.classify).new(model, val, whitelist)
+          DynamicSubclasser.create(Collaborator, model.to_s.classify).new(model, val, whitelist)
         end
       end
     end
