@@ -17,6 +17,16 @@ describe 'Figurine::Many' do
       car_form = CarForm.new(:tires => [{:wear_rating => 'QR'}, {:wear_rating => 'ZR'}])
       expect(car_form.tires).to eql([{:wear_rating => 'QR'}, {:wear_rating => 'ZR'}])
     end
+
+    it 'ignores nil values' do
+      car_form = CarForm.new(:tires => nil)
+      expect(car_form.tires).to be_nil
+    end
+
+    it 'ignores nil values within the array' do
+      car_form = CarForm.new(:tires => [nil, {:wear_rating => 'ZR'}])
+      expect(car_form.tires).to eql([{:wear_rating => 'ZR'}])
+    end
   end
 
   context 'many collaborators have whitelist' do

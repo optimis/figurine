@@ -10,6 +10,7 @@ module Figurine
       end
 
       define_method "#{model}=" do |val|
+        return if val.nil?
         whitelist = self.class.instance_variable_get("@whitelist")[model]
         @attributes[model] = if val.respond_to?(:to_hash)
           Hash[*val.to_hash.select { |key, _| whitelist.include?(key) || whitelist.empty? }.flatten]

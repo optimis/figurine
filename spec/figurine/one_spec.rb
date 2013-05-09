@@ -18,6 +18,11 @@ describe 'Figurine::One' do
       car_form = CarForm.new(:trunk => trunk)
       expect(car_form.trunk).to eql(:foo => 'bar', :baz => 'qux')
     end
+
+    it 'ignores nil values' do
+      car_form = CarForm.new(:trunk => nil)
+      expect(car_form.trunk).to be_nil
+    end
   end
 
   describe 'accessors' do

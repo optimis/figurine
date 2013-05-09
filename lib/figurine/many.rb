@@ -9,6 +9,7 @@ module Figurine
       end
 
       define_method "#{model}=" do |values|
+        return if values.nil?
         whitelist = self.class.instance_variable_get("@whitelist")[model]
         @attributes[model] = values.map do |val|
           attributes = if val.respond_to?(:to_hash)
