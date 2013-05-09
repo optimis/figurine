@@ -12,12 +12,7 @@ module Figurine
       define_method "#{model}=" do |val|
         return if val.nil?
         whitelist = self.class.instance_variable_get("@whitelist")[model]
-        @attributes[model] = if val.respond_to?(:to_hash)
-          Hash[*val.to_hash.select { |key, _| whitelist.include?(key) || whitelist.empty? }.flatten]
-        elsif val.respond_to?(:attributes)
-          Hash[*val.attributes.select { |key, _| whitelist.include?(key) || whitelist.empty? }.flatten]
-        end
-        val[:id] ? @attributes[model].merge!(:id => val[:id]) : @attributes_model
+        @attributes[model] = DynamicSubclasser.create(Attributes, model.to_s.classify).new(model, val, whitelist)
       end
     end
 
