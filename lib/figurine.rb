@@ -3,7 +3,9 @@ require 'active_model'
 require 'figurine/version'
 
 module Figurine
-  autoload :Form, 'figurine/form'
-  autoload :One,  'figurine/one'
-  autoload :Many, 'figurine/many'
+  autoload :Attributes,        'figurine/attributes'
+  autoload :DynamicSubclasser, 'figurine/dynamic_subclasser'
+  autoload :Form,              'figurine/form'
+  autoload :Many,              'figurine/many'
+  autoload :One,               'figurine/one'
 end
