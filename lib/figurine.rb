@@ -1,4 +1,6 @@
-require "figurine/version"
+require 'active_model'
+
+require 'figurine/version'
 
 module Figurine
   autoload :Form, 'figurine/form'
