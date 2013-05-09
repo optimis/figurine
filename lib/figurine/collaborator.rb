@@ -14,11 +14,11 @@ module Figurine
       attributes = attributes.slice(*whitelist) unless whitelist.empty?
       @attributes = (given[:id] ? attributes.merge!(:id => given[:id]) : attributes)
       @attributes.each do |name, val|
-        self.class.define_method name do
+        self.class.send(:define_method, name) do
           attributes[name]
         end
         
-        self.class.define_method "#{name}=" do |val|
+        self.class.send(:define_method, "#{name}=") do |val|
           attributes[name] = val
         end
       end
