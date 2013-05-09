@@ -66,6 +66,11 @@ describe 'Figurine::Many' do
           {:material => 'Cloth', :color => 'Brown', :id => 2}
         ])
       end
+
+      it 'defaults many collaborator to empty' do
+        car_form = CarForm.new
+        expect(car_form.seats).to be_empty
+      end
     end
 
     context 'no id provided' do
