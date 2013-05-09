@@ -1,15 +1,18 @@
+require 'active_support/core_ext/hash/slice'
+
 module Figurine
   class Collaborator < ActiveSupport::BasicObject
     extend ActiveModel::Naming
     include ActiveModel::Conversion
 
-    def initialize(val, whitelist)
-      attributes = if val.respond_to?(:to_hash)
-        Hash[*val.to_hash.select { |key, _| whitelist.include?(key) || whitelist.empty? }.flatten]
-      elsif val.respond_to?(:attributes)
-        Hash[*val.attributes.select { |key, _| whitelist.include?(key) || whitelist.empty? }.flatten]
+    def initialize(given, whitelist)
+      attributes = if given.respond_to?(:to_hash)
+        given.to_hash
+      elsif given.respond_to?(:attributes)
+        given.attributes
       end
-      @attributes = attributes = val[:id] ? attributes.merge!(:id => val[:id]) : attributes
+      attributes = attributes.slice(*whitelist) unless whitelist.empty?
+      @attributes = (given[:id] ? attributes.merge!(:id => given[:id]) : attributes)
       @attributes.each do |name, val|
         self.class.define_method name do
           attributes[name]
