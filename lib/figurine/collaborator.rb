@@ -3,8 +3,7 @@ module Figurine
     extend ActiveModel::Naming
     include ActiveModel::Conversion
 
-    def initialize(model, val, whitelist)
-      @model = model
+    def initialize(val, whitelist)
       attributes = if val.respond_to?(:to_hash)
         Hash[*val.to_hash.select { |key, _| whitelist.include?(key) || whitelist.empty? }.flatten]
       elsif val.respond_to?(:attributes)
