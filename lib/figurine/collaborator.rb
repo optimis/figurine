@@ -10,7 +10,16 @@ module Figurine
       elsif val.respond_to?(:attributes)
         Hash[*val.attributes.select { |key, _| whitelist.include?(key) || whitelist.empty? }.flatten]
       end
-      @attributes = val[:id] ? attributes.merge!(:id => val[:id]) : attributes
+      @attributes = attributes = val[:id] ? attributes.merge!(:id => val[:id]) : attributes
+      @attributes.each do |name, val|
+        self.class.define_method name do
+          attributes[name]
+        end
+        
+        self.class.define_method "#{name}=" do |val|
+          attributes[name] = val
+        end
+      end
     end
 
     def method_missing(m, *args, &block)
