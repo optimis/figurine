@@ -23,6 +23,13 @@ describe Figurine::Collaborator do
     end
   end
 
+  describe '#object' do
+    it 'returns thing given when intialized' do
+      thing = {}
+      expect(Figurine::Collaborator.new(thing, []).object).to equal(thing)
+    end
+  end
+
   describe 'dynamic accessors' do
     it 'defines dynamic accessors for the keys in @attributes' do
       attributes = { :foo => 'bar', :baz => 'qux' }

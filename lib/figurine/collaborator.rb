@@ -6,6 +6,7 @@ module Figurine
     include ActiveModel::Conversion
 
     def initialize(given, whitelist)
+      @given = given
       attributes = if given.respond_to?(:to_hash)
         given.to_hash
       elsif given.respond_to?(:attributes)
@@ -22,6 +23,10 @@ module Figurine
           attributes[name] = val
         end
       end
+    end
+
+    def object
+      @given
     end
 
     def method_missing(m, *args, &block)
